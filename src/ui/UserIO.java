@@ -1,4 +1,4 @@
-package labs_examples.objects_classes_methods.labs.oop.D_flashcard.ui;
+package ui;
 
 public interface UserIO {
     public void print(String msg);

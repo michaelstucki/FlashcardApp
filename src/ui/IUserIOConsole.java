@@ -1,4 +1,4 @@
-package labs_examples.objects_classes_methods.labs.oop.D_flashcard.ui;
+package ui;
 
 import java.util.Scanner;
 

@@ -1,10 +1,18 @@
-package labs_examples.objects_classes_methods.labs.oop.D_flashcard.dto;
+package dto;
 
 public class Card {
     private static int nextCardId = 1;
-    private final int cardId = nextCardId++;
+    private int cardId = nextCardId++;
     private String front;
     private String back;
+
+    public Card() {}
+
+    public Card(int cardId, String front, String back) {
+        this.cardId = cardId;
+        this.front = front;
+        this.back = back;
+    }
 
     public int getId() { return cardId; }
 

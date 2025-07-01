@@ -1,11 +1,11 @@
-package labs_examples.objects_classes_methods.labs.oop.D_flashcard.dao;
+package dao;
 
-import labs_examples.objects_classes_methods.labs.oop.D_flashcard.dto.Card;
+import dto.Card;
 import java.util.List;
 
 public interface FlashCardDao {
-    List<Card> getAllCards();
-    Card addCard(int cardId, Card card);
-    Card viewCard(int cardId);
-    Card removeCard(int id);
+    List<Card> getAllCards() throws FlashCardDaoException;
+    Card addCard(int cardId, Card card) throws FlashCardDaoException;
+    Card viewCard(int cardId) throws FlashCardDaoException;
+    Card removeCard(int id) throws FlashCardDaoException;
 }

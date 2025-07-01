@@ -1,11 +1,9 @@
-package labs_examples.objects_classes_methods.labs.oop.D_flashcard;
-
-import labs_examples.objects_classes_methods.labs.oop.D_flashcard.controller.FlashCardController;
-import labs_examples.objects_classes_methods.labs.oop.D_flashcard.dao.FlashCardDao;
-import labs_examples.objects_classes_methods.labs.oop.D_flashcard.dao.IFlashCardDaoFile;
-import labs_examples.objects_classes_methods.labs.oop.D_flashcard.ui.FlashCardView;
-import labs_examples.objects_classes_methods.labs.oop.D_flashcard.ui.IUserIOConsole;
-import labs_examples.objects_classes_methods.labs.oop.D_flashcard.ui.UserIO;
+import controller.FlashCardController;
+import dao.FlashCardDao;
+import dao.IFlashCardDaoFile;
+import ui.FlashCardView;
+import ui.IUserIOConsole;
+import ui.UserIO;
 
 public class FlashCardApp {
 

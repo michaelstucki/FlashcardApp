@@ -1,6 +1,6 @@
-package labs_examples.objects_classes_methods.labs.oop.D_flashcard.ui;
+package ui;
 
-import labs_examples.objects_classes_methods.labs.oop.D_flashcard.dto.Card;
+import dto.Card;
 import java.util.List;
 
 public class FlashCardView {
@@ -94,4 +94,6 @@ public class FlashCardView {
     public void close() {
         io.close();
     }
+
+    public void displayErrorMessage(String message) { io.print(message); }
 }
