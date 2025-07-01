@@ -6,8 +6,8 @@ import java.io.*;
 import java.util.*;
 
 public class IFlashCardDaoFile implements FlashCardDao {
-    public static final String CARD_FILE = "flashcards.txt";
-    public static final String DELIMITER = "::";
+    private static final String CARD_FILE = "flashcards.txt";
+    private static final String DELIMITER = "::";
 
     private final Map<Integer, Card> cards = new HashMap<>();
 
@@ -39,7 +39,7 @@ public class IFlashCardDaoFile implements FlashCardDao {
         return cardToRemove;
     }
 
-    public Card unmarshalCard(String cardAsText) {
+    private Card unmarshalCard(String cardAsText) {
         String[] cardTokens = cardAsText.split(DELIMITER);
         int cardId = Integer.parseInt(cardTokens[0]);
         String front = cardTokens[1];
@@ -47,7 +47,7 @@ public class IFlashCardDaoFile implements FlashCardDao {
         return new Card(cardId, front, back);
     }
 
-    public void loadCards() throws FlashCardDaoException {
+    private void loadCards() throws FlashCardDaoException {
         Scanner scanner = null;
 
         try {
@@ -67,14 +67,14 @@ public class IFlashCardDaoFile implements FlashCardDao {
         }
     }
 
-    public String marshalCard(Card card) {
+    private String marshalCard(Card card) {
         String cardAsText = card.getId() + DELIMITER;
         cardAsText += card.getFront() + DELIMITER;
         cardAsText += card.getBack();
         return cardAsText;
     }
 
-    public void writeCards() throws FlashCardDaoException {
+    private void writeCards() throws FlashCardDaoException {
         PrintWriter out = null;
 
         try {
