@@ -48,10 +48,8 @@ public class IFlashCardDaoFile implements FlashCardDao {
     }
 
     private void loadCards() throws FlashCardDaoException {
-        Scanner scanner = null;
 
-        try {
-            scanner = new Scanner(new BufferedReader(new FileReader(CARD_FILE)));
+        try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(CARD_FILE)))) {
             String record;
             Card card;
             while (scanner.hasNextLine()) {
@@ -59,11 +57,9 @@ public class IFlashCardDaoFile implements FlashCardDao {
                 card = unmarshalCard(record);
                 cards.put(card.getId(), card);
             }
-        // Translate implementation-specific exception into an application-specific exception
+            // Translate implementation-specific exception into an application-specific exception
         } catch (FileNotFoundException e) {
             throw new FlashCardDaoException("*** Could not load cards data into memory.", e);
-        } finally {
-            if (scanner != null) scanner.close();
         }
     }
 
@@ -75,10 +71,8 @@ public class IFlashCardDaoFile implements FlashCardDao {
     }
 
     private void writeCards() throws FlashCardDaoException {
-        PrintWriter out = null;
 
-        try {
-            out = new PrintWriter(new FileWriter(CARD_FILE));
+        try (PrintWriter out = new PrintWriter(new FileWriter(CARD_FILE))) {
             String cardAsText;
             List<Card> cardList = new ArrayList<>(cards.values());
             for (Card card : cardList) {
@@ -86,11 +80,9 @@ public class IFlashCardDaoFile implements FlashCardDao {
                 out.println(cardAsText);
                 out.flush();
             }
-        // Translate implementation-specific exception into an application-specific exception
+            // Translate implementation-specific exception into an application-specific exception
         } catch (IOException e) {
             throw new FlashCardDaoException("Could not save student data.", e);
-        } finally {
-            if (out != null) out.close();
         }
     }
 }
