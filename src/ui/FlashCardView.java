@@ -39,6 +39,7 @@ public class FlashCardView {
 
     public Card getNewCard() {
         Card card = new Card();
+        card.setId(io.readInt("Please enter the card's ID number"));
         card.setFront(io.readString("Please enter the card's front (question or prompt)"));
         card.setBack(io.readString("Please enter the card's back (answer or response"));
         return card;

@@ -1,7 +1,6 @@
 package dao;
 
 import dto.Card;
-
 import java.io.*;
 import java.util.*;
 
@@ -18,17 +17,17 @@ public class IFlashCardDaoFile implements FlashCardDao {
     }
 
     @Override
-    public Card addCard(int cardId, Card card) throws FlashCardDaoException {
+    public Card addCard(int id, Card card) throws FlashCardDaoException {
         loadCards();
-        Card newCard = cards.put(cardId, card);
+        Card newCard = cards.put(id, card);
         writeCards();
         return newCard;
     }
 
     @Override
-    public Card viewCard(int cardId) throws FlashCardDaoException {
+    public Card viewCard(int id) throws FlashCardDaoException {
         loadCards();
-        return cards.get(cardId);
+        return cards.get(id);
     }
 
     @Override
@@ -84,5 +83,10 @@ public class IFlashCardDaoFile implements FlashCardDao {
         } catch (IOException e) {
             throw new FlashCardDaoException("Could not save student data.", e);
         }
+    }
+
+    @Override
+    public boolean checkCardId(Card card) {
+        return cards.containsKey(card.getId());
     }
 }

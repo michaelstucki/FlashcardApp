@@ -63,8 +63,12 @@ public class FlashCardController {
     private void addCard() throws FlashCardDaoException {
         view.displayAddCardBanner();
         Card card = view.getNewCard();
-        dao.addCard(card.getId(), card);
-        view.displayAddCardSuccessBanner();
+        if (dao.checkCardId(card)) {
+            view.displayErrorMessage("#" + card.getId() + " exists! Card not added.");
+        } else {
+            dao.addCard(card.getId(), card);
+            view.displayAddCardSuccessBanner();
+        }
     }
 
     private void displayCard() throws FlashCardDaoException {
