@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.*;
 
 public class IFlashCardDaoFile implements FlashCardDao {
+    private enum Index {ID, FRONT, BACK};
     private static final String CARD_FILE = "src/files/flashcards.txt";
     private static final String DELIMITER = "::";
     private final Map<Integer, Card> cards = new HashMap<>();
@@ -39,9 +40,9 @@ public class IFlashCardDaoFile implements FlashCardDao {
 
     private Card unmarshalCard(String cardAsText) {
         String[] cardTokens = cardAsText.split(DELIMITER);
-        int cardId = Integer.parseInt(cardTokens[0]);
-        String front = cardTokens[1];
-        String back = cardTokens[2];
+        int cardId = Integer.parseInt(cardTokens[Index.ID.ordinal()]);
+        String front = cardTokens[Index.FRONT.ordinal()];
+        String back = cardTokens[Index.BACK.ordinal()];
         return new Card(cardId, front, back);
     }
 
