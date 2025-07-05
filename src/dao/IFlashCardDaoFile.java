@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.*;
 
 public class IFlashCardDaoFile implements FlashCardDao {
-    private static final String CARD_FILE = "flashcards.txt";
+    private static final String CARD_FILE = "src/files/flashcards.txt";
     private static final String DELIMITER = "::";
 
     private final Map<Integer, Card> cards = new HashMap<>();
