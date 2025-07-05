@@ -7,7 +7,6 @@ import java.util.*;
 public class IFlashCardDaoFile implements FlashCardDao {
     private static final String CARD_FILE = "src/files/flashcards.txt";
     private static final String DELIMITER = "::";
-
     private final Map<Integer, Card> cards = new HashMap<>();
 
     @Override
@@ -47,18 +46,16 @@ public class IFlashCardDaoFile implements FlashCardDao {
     }
 
     private void loadCards() throws FlashCardDaoException {
-
-        try (Scanner scanner = new Scanner(new BufferedReader(new FileReader(CARD_FILE)))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(CARD_FILE))) {
             String record;
             Card card;
-            while (scanner.hasNextLine()) {
-                record = scanner.nextLine();
+            while ((record = reader.readLine()) != null) {
                 card = unmarshalCard(record);
                 cards.put(card.getId(), card);
             }
-            // Translate implementation-specific exception into an application-specific exception
-        } catch (FileNotFoundException e) {
-            throw new FlashCardDaoException("*** Could not load cards data into memory.", e);
+        // Translate implementation-specific exception into an application-specific exception
+        } catch (IOException e) {
+            throw new FlashCardDaoException("*** Could not load cards into memory.", e);
         }
     }
 
@@ -70,22 +67,22 @@ public class IFlashCardDaoFile implements FlashCardDao {
     }
 
     private void writeCards() throws FlashCardDaoException {
-
-        try (PrintWriter out = new PrintWriter(new FileWriter(CARD_FILE))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(CARD_FILE))) {
             String cardAsText;
             List<Card> cardList = new ArrayList<>(cards.values());
             for (Card card : cardList) {
                 cardAsText = marshalCard(card);
-                out.println(cardAsText);
-                out.flush();
+                writer.write(cardAsText);
+                writer.newLine();
             }
-            // Translate implementation-specific exception into an application-specific exception
+          // Translate implementation-specific exception into an application-specific exception
         } catch (IOException e) {
             throw new FlashCardDaoException("Could not save student data.", e);
         }
     }
 
     @Override
+    // TODO move into service layer (to handle business logic to enforce business rules)
     public boolean checkCardId(Card card) {
         return cards.containsKey(card.getId());
     }
