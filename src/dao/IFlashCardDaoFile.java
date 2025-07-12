@@ -1,8 +1,13 @@
 package dao;
 
 import dto.Card;
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.*;
 import java.util.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class IFlashCardDaoFile implements FlashCardDao {
     private enum Index {ID, FRONT, BACK};
@@ -46,6 +51,13 @@ public class IFlashCardDaoFile implements FlashCardDao {
         return new Card(cardId, front, back);
     }
 
+    private String marshalCard(Card card) {
+        String cardAsText = card.getId() + DELIMITER;
+        cardAsText += card.getFront() + DELIMITER;
+        cardAsText += card.getBack();
+        return cardAsText;
+    }
+
     private void loadCards() throws FlashCardDaoException {
         try (BufferedReader reader = new BufferedReader(new FileReader(CARD_FILE))) {
             String record;
@@ -54,17 +66,10 @@ public class IFlashCardDaoFile implements FlashCardDao {
                 card = unmarshalCard(record);
                 cards.put(card.getId(), card);
             }
-        // Translate implementation-specific exception into an application-specific exception
+            // Translate implementation-specific exception into an application-specific exception
         } catch (IOException e) {
             throw new FlashCardDaoException("*** Could not load cards into memory.", e);
         }
-    }
-
-    private String marshalCard(Card card) {
-        String cardAsText = card.getId() + DELIMITER;
-        cardAsText += card.getFront() + DELIMITER;
-        cardAsText += card.getBack();
-        return cardAsText;
     }
 
     private void writeCards() throws FlashCardDaoException {
