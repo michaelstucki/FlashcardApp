@@ -1,13 +1,8 @@
 package dao;
 
 import dto.Card;
-import org.w3c.dom.ls.LSOutput;
-
 import java.io.*;
 import java.util.*;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class IFlashCardDaoFile implements FlashCardDao {
     private enum Index {ID, FRONT, BACK};
